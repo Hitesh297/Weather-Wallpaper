@@ -1,0 +1,32 @@
+{
+  "name": "api-project",
+  "version": "1.0.0",
+  "description": "Project developed by integrating 2 API's",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon ./index.js",
+    "refresh-ui": "browser-sync start --config bs-config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hitesh297/Weather-Wallpaper.git"
+  },
+  "keywords": [
+    "API"
+  ],
+  "author": "Hitesh Patel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hitesh297/Weather-Wallpaper/issues"
+  },
+  "homepage": "https://github.com/Hitesh297/Weather-Wallpaper#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "pug": "^3.0.2"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.27.10",
+    "nodemon": "^2.0.19"
+  }
+}
