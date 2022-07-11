@@ -1,0 +1,33 @@
+extends layout
+
+block layout-content
+  h2 Right now #{weatherData.weather[0].description} in #{weatherData.name}
+  #weather-details
+    #current-weather 
+      img(src=`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png` alt="")
+      div 
+        - temperature = Math.round(weatherData.main.temp)
+        #temp-number #{temperature}
+        #temp-unit °C
+      #other-details-section
+        #other-details 
+          span Humidity: #{weatherData.main.humidity}%
+          span Wind: #{weatherData.wind.speed} meter/sec
+        #feels-like-section
+          #feels-like 
+            span FEELS LIKE
+            #feels-like-value 
+              - feelslike = Math.round(weatherData.main.feels_like)
+              span #{feelslike}°C
+    #area-details
+      #city-details 
+        span CITY: #{weatherData.name},#{weatherData.sys.country}
+      #sun-section 
+        span Sunrise: #{weatherData.sys.sunrise}
+        span Sunset: #{weatherData.sys.sunset}
+  ul#gallery 
+    each photo in photoResults
+      li 
+        a(href=`${photo.urls.full}`) 
+          img(src=`${photo.urls.small}`, alt=`${photo.alt_description}`)
+    
