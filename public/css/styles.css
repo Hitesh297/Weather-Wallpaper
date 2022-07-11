@@ -9,6 +9,7 @@ body {
     display: flex;
     justify-content: space-between;
     padding: 0 12px;
+    flex-wrap: wrap;
 }
 
 #current-weather {
