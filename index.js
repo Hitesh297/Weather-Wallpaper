@@ -22,8 +22,9 @@ app.get("/", (request, response) => {
 app.get("/wallpapers", (req, res) => {
     var lat = req.query.lat;
     var long = req.query.long;
+    var page = req.query.page;
     console.log(lat, long);
-    GetWeatherInfoByCoordinates(res, lat, long);
+    GetWeatherInfoByCoordinates(res, lat, long, page);
     // console.log(weatherData);
     // response.render("wallpapers", { title: "Wallpapers" });
 });
@@ -36,7 +37,7 @@ app.listen(port, () => {
     console.log(`Listening on http://localhost:${port}`);
 })
 
-function GetWeatherInfoByCoordinates(res,lat, long) {
+function GetWeatherInfoByCoordinates(res,lat, long, page) {
     axios(
         //config options
         {
@@ -45,32 +46,31 @@ function GetWeatherInfoByCoordinates(res,lat, long) {
             headers: {}
         }
     ).then(function (response) {
-        console.log(response.data);
         response.data.sys.sunset = GetDate(response.data.sys.sunset);
         response.data.sys.sunrise = GetDate(response.data.sys.sunrise);
         var params = {
-            page: 1,
-            query: response.data.weather[0].description,
+            page: page,
+            query: response.data.weather[0].main,
             orientation: "landscape"
           };
           let formattedParams = qs.stringify(params);
-
+          console.log(page);
         axios(
             //config options
             {
               url: `https://api.unsplash.com/search/photos?${formattedParams}`,
               method: "get",
               headers: {
-                "Authorization": "Client-ID B8VyVSFMiq96KYnJfjM19wqOPhXe47R0Ju4bot_smls"
+                "Authorization": `Client-ID ${process.env.UNSPLASH_CLIENT_ID}`
               }
             }
             ).then(function (photoresponse) {
                 // console.log(photoresponse.data.results);
-                console.log(response.data);
                 res.render("wallpapers", {
                     title: "Wallpapers",
                     weatherData: response.data,
-                    photoResults: photoresponse.data.results
+                    photoResults: photoresponse.data.results,
+                    page: page
                 });
             }).catch(function (error) {
               //Put what to do on error here.

@@ -1,15 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cookie&display=swap');
+
 body {
     margin: 0;
-    background-color: bisque;
+    background-color: #102B3F;
 }
 
+/* Styles to display weather data */
 #weather-details {
     font-family: 'Roboto', sans-serif;
     display: flex;
     justify-content: space-between;
     padding: 0 12px;
     flex-wrap: wrap;
+    color: aliceblue;
+    align-items: center;
+}
+
+#temp-number,
+#temp-unit {
+    color: #ffd098;
 }
 
 #current-weather {
@@ -65,8 +75,19 @@ body {
 #area-details {
     display: flex;
     gap: 17px;
+    align-items: center;
 }
 
+/* styles to display heading on top */
+.heading {
+    margin: auto;
+    text-align: center;
+    font-family: 'Cookie', cursive;
+    color: rgb(233, 166, 166);
+    font-size: 30px;
+}
+
+/* Styles to display images */
 #gallery {
     display: flex;
     flex-wrap: wrap;
@@ -75,17 +96,99 @@ body {
     justify-content: center;
     padding: 0;
     align-items: center;
+    padding: 0 30px 0 30px;
 }
 
-/* #gallery li {
-    flex-basis: 24%;
-    flex-grow: 1;
-} */
-
-#gallery img {
+.thumbnails {
     border-radius: 5px;
+    display: block;
+    width: 100%;
+    height: auto;
 }
 
-#gallery img {
+
+
+.img-overlay {
+    position: absolute;
+    /* top: 0; */
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 20%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: #008CBA;
     border-radius: 5px;
+    transform: translateY(134px);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    justify-content: center;
+}
+
+.container:hover .img-overlay {
+    opacity: 0.9;
+    transform: translateY(0px);
+}
+
+.container {
+    position: relative;
+    overflow: hidden;
+}
+
+.author-details {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    margin-left: 5px;
+}
+
+.author-link {
+    text-decoration: none;
+    color: black;
+    font-family: 'Roboto', sans-serif;
+}
+
+#pagination {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 10px 0 10px 0;
+    font-size: 30px;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+}
+
+#next-button:hover {
+    cursor: pointer;
+    color: #008CBA;
+}
+
+#prev-button:hover {
+    cursor: pointer;
+    color: #008CBA;
+}
+
+footer {
+    padding: 20px;
+    background: #062726;
+    font-family: 'Roboto', sans-serif;
+    color: #008CBA;
+}
+
+@media screen and (max-width:660px) {
+    #weather-details {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width:959px) {
+    #message {
+        order: 1;
+        width: 100%;
+    }
 }

@@ -1,7 +1,12 @@
 extends layout
 
 block layout-content
-  h2 Right now #{weatherData.weather[0].description} in #{weatherData.name}
+  script(type='text/javascript', src='/js/gallery.js')
+  #page-data 
+    //- saving data to use it in next call
+    input#lat(type="hidden", name="latitude", value=`${weatherData.coord.lat}`)
+    input#long(type="hidden", name="longitude", value=`${weatherData.coord.lon}`)
+    input#page(type="hidden", name="page", value=`${page}`)
   #weather-details
     #current-weather 
       img(src=`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png` alt="")
@@ -19,6 +24,9 @@ block layout-content
             #feels-like-value 
               - feelslike = Math.round(weatherData.main.feels_like)
               span #{feelslike}°C
+    #message 
+      p.heading Right now #{weatherData.weather[0].description} in #{weatherData.name}.
+      p.heading Set Wallpaper that match the weather!
     #area-details
       #city-details 
         span CITY: #{weatherData.name},#{weatherData.sys.country}
@@ -26,8 +34,24 @@ block layout-content
         span Sunrise: #{weatherData.sys.sunrise}
         span Sunset: #{weatherData.sys.sunset}
   ul#gallery 
+    //- looping through the results to display images as a list
     each photo in photoResults
-      li 
-        a(href=`${photo.urls.full}`) 
-          img(src=`${photo.urls.small}`, alt=`${photo.alt_description}`)
+      li
+        .container 
+          a(href=`${photo.urls.full}`) 
+            img.thumbnails(src=`${photo.urls.small}&h=250&fit=crop`, alt=`${photo.alt_description}`)
+          .img-overlay
+            .author-details
+              img(src=`${photo.user.profile_image.small}`, alt="profile image")
+              a(href=`${photo.user.links.html}`).author-link #{photo.user.name}
+  #pagination 
+    //- pagination added, uses js to request next page
+    #prev-button 
+      i.fa-solid.fa-chevron-left 
+      span Prev
+    #next-button
+      span Next
+      i.fa-solid.fa-chevron-right 
+        
+              
     
