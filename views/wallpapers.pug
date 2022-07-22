@@ -31,8 +31,12 @@ block layout-content
       #city-details 
         span CITY: #{weatherData.name},#{weatherData.sys.country}
       #sun-section 
-        span Sunrise: #{weatherData.sys.sunrise}
-        span Sunset: #{weatherData.sys.sunset}
+        - var sunrisetime = new Date(weatherData.sys.sunrise * 1000);
+        - var sunriseConvertedTime = (sunrisetime.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }));
+        span Sunrise: #{sunriseConvertedTime}
+        - var sunsettime = new Date(weatherData.sys.sunset * 1000);
+        - var sunsetConvertedTime = (sunsettime.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }));
+        span Sunset: #{sunsetConvertedTime}
   ul#gallery 
     //- looping through the results to display images as a list
     each photo in photoResults

@@ -42,8 +42,6 @@ function DisplayPicturesByLocation(res,lat, long, page) {
             headers: {}
         }
     ).then(function (response) {
-        response.data.sys.sunset = GetDate(response.data.sys.sunset);
-        response.data.sys.sunrise = GetDate(response.data.sys.sunrise);
 
         // call unsplash api by passing weather condition as query string
         var params = {
@@ -75,10 +73,4 @@ function DisplayPicturesByLocation(res,lat, long, page) {
     }).catch(function (error) {
         console.log(error);
     });
-}
-
-// GetDate converts utc seconds to local time format
-function GetDate(unixutcseconds) {
-    var date = new Date(unixutcseconds * 1000);
-    return (date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }));
 }
