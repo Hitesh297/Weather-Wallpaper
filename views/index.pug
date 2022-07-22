@@ -1,7 +1,9 @@
 extends layout
 
 block layout-content
-  h2 Please allow location access.
+  #load
+    h2#message Please allow location access.
+    h2#status Loading...
   #demo
 
   script(type='text/javascript', src='/js/script.js')

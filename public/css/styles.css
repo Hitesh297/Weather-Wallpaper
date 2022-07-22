@@ -17,6 +17,20 @@ body {
     align-items: center;
 }
 
+#load {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    color: aliceblue;
+    font-family: 'Roboto', sans-serif;
+}
+
+#status {
+    display: none;
+}
+
 #temp-number,
 #temp-unit {
     color: #ffd098;
